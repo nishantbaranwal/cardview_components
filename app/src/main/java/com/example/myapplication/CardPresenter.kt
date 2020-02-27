@@ -4,16 +4,16 @@ import android.graphics.Color
 import android.view.ViewGroup
 import androidx.leanback.widget.Presenter
 
-class CardPresenter: Presenter() {
+class CardPresenter(val customListRowPresenter: CustomListRowPresenter): Presenter() {
     var cardView:ImageCardView?=null
     var i:Int=0
     override fun onBindViewHolder(viewHolder: ViewHolder?, item: Any?) {
 
         val cardView:ImageCardView = viewHolder!!.view as ImageCardView
         cardView.setMainContainerDimensions(400,300)
-        val s = "Hulk"+i++
-        cardView.setTitle(s)
-        cardView.setIcon(R.drawable.hulk)
+        val imageModel = item as ImageModel
+        cardView.setTitle(imageModel.text)
+        cardView.setIcon(imageModel.icon)
     }
 
     override fun onUnbindViewHolder(viewHolder: ViewHolder?) {
@@ -29,8 +29,7 @@ class CardPresenter: Presenter() {
         cardView!!.setMainContainerDimensions(400,300)
         cardView!!.setTitle("Hulk")
         cardView!!.setIcon(R.drawable.hulk)
-//        cardView!!.setTitleColor(Color.RED)
-//        cardView!!.setBackgroundColor(Color.BLUE)
+//        customListRowPresenter.setHeaderImage(R.drawable.hulk)
         return ViewHolder(cardView!!)
     }
 }
