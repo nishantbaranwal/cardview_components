@@ -23,8 +23,6 @@ class ListFragment1 : RowsSupportFragment() {
         setupRows()
     }
 
-    var imageModelList= arrayListOf<ImageModel>()
-
     private fun setupRows() {
 
 
