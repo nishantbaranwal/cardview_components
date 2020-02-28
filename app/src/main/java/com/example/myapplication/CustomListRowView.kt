@@ -3,12 +3,14 @@ package com.example.myapplication
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.leanback.widget.HorizontalGridView
+import androidx.leanback.widget.ShadowOverlayContainer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -25,7 +27,17 @@ class CustomListRowView(context: Context, attributeSet: AttributeSet?) : LinearL
 
         mHorizontalGridView = findViewById(R.id.grid_view)
         mHorizontalGridView!!.setHasFixedSize(false)
-
+        header.setOnKeyListener { v, keyCode, event ->
+            if(event.action == KeyEvent.ACTION_DOWN){
+                if(keyCode==KeyEvent.KEYCODE_DPAD_RIGHT){
+                    mHorizontalGridView!!.selectedPosition=0
+//                        .requestFocus()
+                    Log.d("sajfsajkfg",  (mHorizontalGridView!!.getChildAt(0) as ShadowOverlayContainer).getChildAt(0)
+                        ::class.toString())
+                }
+            }
+            return@setOnKeyListener false
+        }
 //        orientation = VERTICAL
 //        val adapter = CustomAdapter(this)
 //

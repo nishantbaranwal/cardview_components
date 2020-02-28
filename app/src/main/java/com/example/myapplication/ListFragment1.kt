@@ -75,7 +75,7 @@ class ListFragment1 : RowsSupportFragment() {
                                     }
                                     else {
                                         if (((rowViewHolder.view) as CustomListRowView).getImage() == R.drawable.superman) {
-                                            if (j > 0) j--
+                                            if (j >= 0) j--
                                             if (j == -1)
                                                 ((rowViewHolder.view) as CustomListRowView).getImageView().requestFocus()
                                         }
@@ -87,10 +87,10 @@ class ListFragment1 : RowsSupportFragment() {
 
                                     if(((rowViewHolder.view) as CustomListRowView).getImage()==R.drawable.hulk) {
                                         if (i < 4) i++
-                                        if(((rowViewHolder.view) as CustomListRowView).getImageView().hasFocus()){
-                                            ((rowViewHolder.view) as CustomListRowView).getGridView().getChildAt(i).requestFocus()
-
-                                        }
+//                                        if(((rowViewHolder.view) as CustomListRowView).getImageView().hasFocus()){
+//                                            ((rowViewHolder.view) as CustomListRowView).getGridView().getChildAt(i).requestFocus()
+//
+//                                        }
                                     }
                                     else
                                         if(((rowViewHolder.view) as CustomListRowView).getImage()==R.drawable.superman){

@@ -24,11 +24,11 @@ class CustomListRowPresenter: ListRowPresenter() {
     override fun onBindRowViewHolder(holder: RowPresenter.ViewHolder, item: Any) {
 //        super.onBindRowViewHolder(holder, item)
         val vh = holder as ListRowPresenter.ViewHolder
-        var rowItem:Any ?
+        val rowItem:Any ?
         if(item is ListRow) {
             rowItem = item
-            vh!!.bridgeAdapter?.setAdapter(rowItem.adapter)
-            customListRowView!!.getGridView().adapter = vh!!.bridgeAdapter
+            vh.bridgeAdapter?.setAdapter(rowItem.adapter)
+            customListRowView!!.getGridView().adapter = vh.bridgeAdapter
             customListRowView!!.getGridView().contentDescription = rowItem.contentDescription
 //            val headerName:String=rowItem.headerItem.name
 //            customListRowView!!.setTextView("SuperMan")
