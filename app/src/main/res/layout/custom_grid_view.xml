@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.leanback.widget.HorizontalGridView xmlns:lb="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/grid_view"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:clipToPadding="false"
+    lb:rowHeight="wrap_content"
+    style="?attr/rowHorizontalGridStyle" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/titleName"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="61dp"-->
+<!--        android:gravity="center"-->
+<!--        android:textColor="#000000"-->
+<!--        android:textSize="16sp" />-->
+
