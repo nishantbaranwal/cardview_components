@@ -82,7 +82,17 @@ class ListFragment1 : RowsSupportFragment() {
 
                                 }
                                 KeyEvent.KEYCODE_DPAD_RIGHT-> {
-
+                                    if((((rowViewHolder.view) as CustomListRowView).getGridView().getChildAt(0)
+                                                as ShadowOverlayContainer).getChildAt(0).hasFocus()
+                                        && ((rowViewHolder.view) as CustomListRowView).getImage() == R.drawable.hulk) {
+                                        i=0
+                                    }
+                                    else
+                                    if((((rowViewHolder.view) as CustomListRowView).getGridView().getChildAt(0)
+                                                as ShadowOverlayContainer).getChildAt(0).hasFocus()
+                                        && ((rowViewHolder.view) as CustomListRowView).getImage() == R.drawable.superman) {
+                                        j=0
+                                    }
                                     if(((rowViewHolder.view) as CustomListRowView).getImage()==R.drawable.hulk) {
                                         if (i < 4) i++
 //                                        if(((rowViewHolder.view) as CustomListRowView).getImageView().hasFocus()){
@@ -101,13 +111,20 @@ class ListFragment1 : RowsSupportFragment() {
                         }
                         return@setOnKeyListener false
                     }
-                    if(rowViewHolder!=null)
-                        if(((rowViewHolder.view) as CustomListRowView).getImage()==R.drawable.hulk) {
-                            ((rowViewHolder.view) as CustomListRowView).setTextView("Hulk"+i)
+                    if(rowViewHolder!=null) {
+                        if (((rowViewHolder.view) as CustomListRowView).getImage() == R.drawable.hulk) {
+                            ((rowViewHolder.view) as CustomListRowView).setTextView("Hulk" + i)
+//                            if(((rowViewHolder.view) as CustomListRowView).getImageView().hasFocus()){
+//                                i=0
+//                            }
+                        } else {
+                            ((rowViewHolder.view) as CustomListRowView).setTextView("Superman" + j)
+//                            if(((rowViewHolder.view) as CustomListRowView).getImageView().hasFocus()){
+//                                j=0
+//                            }
                         }
-                    else{
-                            ((rowViewHolder.view) as CustomListRowView).setTextView("Superman"+j)
-                        }
+
+                    }
 
                 }
         }
