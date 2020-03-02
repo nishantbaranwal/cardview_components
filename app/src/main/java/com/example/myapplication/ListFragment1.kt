@@ -94,6 +94,7 @@ class ListFragment1 : RowsSupportFragment() {
 
                                 }
                                 KeyEvent.KEYCODE_DPAD_RIGHT-> {
+                                    Log.d("Class_Name_is",listRowView.getChildAt(0).javaClass.toString())
                                     if((listRowView.getGridView().getChildAt(0)
                                                 as ShadowOverlayContainer).getChildAt(0).hasFocus()
                                         && listRowView.getImage() == R.drawable.hulk) {

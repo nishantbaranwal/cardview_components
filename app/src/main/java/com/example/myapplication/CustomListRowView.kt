@@ -5,9 +5,11 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.leanback.widget.HorizontalGridView
 import androidx.leanback.widget.ShadowOverlayContainer
@@ -30,10 +32,11 @@ class CustomListRowView(context: Context, attributeSet: AttributeSet?) : LinearL
         header.setOnKeyListener { v, keyCode, event ->
             if(event.action == KeyEvent.ACTION_DOWN){
                 if(keyCode==KeyEvent.KEYCODE_DPAD_RIGHT){
-                    mHorizontalGridView!!.selectedPosition=0
-//                        .requestFocus()
-                    Log.d("sajfsajkfg",  (mHorizontalGridView!!.getChildAt(0) as ShadowOverlayContainer).getChildAt(0)
-                        ::class.toString())
+//                    mHorizontalGridView!!.selectedPosition=0
+////                        .requestFocus()
+//                    Log.d("sajfsajkfg",  (mHorizontalGridView!!.getChildAt(0) as ShadowOverlayContainer).getChildAt(0)
+//                        ::class.toString())
+                    getTextView().visibility = View.VISIBLE
                 }
             }
             return@setOnKeyListener false
@@ -42,6 +45,7 @@ class CustomListRowView(context: Context, attributeSet: AttributeSet?) : LinearL
 //        val adapter = CustomAdapter(this)
 //
 //        mHorizontalGridView!!.adapter = adapter
+
         Log.d("dgfsdgsg",context.toString())
 
     }
@@ -53,6 +57,10 @@ class CustomListRowView(context: Context, attributeSet: AttributeSet?) : LinearL
     fun setTextView(a:String){
         titleName.setText(a)
 //        mHorizontalGridView!!.set
+    }
+
+    fun getTextView():TextView{
+        return titleName
     }
 
     fun getTitleName():String{
