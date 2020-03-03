@@ -12,14 +12,17 @@ import androidx.leanback.app.RowsSupportFragment
 import androidx.leanback.widget.*
 import androidx.leanback.widget.ClassPresenterSelector
 import kotlinx.android.synthetic.main.custom_lb_list_row.view.*
+import java.util.*
 
 
 class ListFragment1 : RowsSupportFragment() {
 
     private var mBackgroundManager: BackgroundManager? = null
     var mMetrics: DisplayMetrics? = null
-    var desc1 = arrayListOf<String>()
-    var desc2 = arrayListOf<String>()
+
+    var customListRowDataClassListHulk = arrayListOf<CustomListRowDataClass>()
+    var customListRowDataClassListSuperman = arrayListOf<CustomListRowDataClass>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         prepareBackgroundManager()
@@ -37,7 +40,7 @@ class ListFragment1 : RowsSupportFragment() {
             val imageModel=ImageModel()
             imageModel.icon=R.drawable.hulk
             imageModel.text="Hulk "+i
-            desc1.add(imageModel.text+" is a movie to watch")
+            customListRowDataClassListHulk.add(CustomListRowDataClass(imageModel.text, imageModel.text+" is a movie to watch",Random().nextInt(4)+1))
             listRowAdapter.add(imageModel)
         }
 
@@ -49,7 +52,7 @@ class ListFragment1 : RowsSupportFragment() {
             val imageModel=ImageModel()
             imageModel.icon=R.drawable.superman
             imageModel.text="Superman "+i
-            desc2.add(imageModel.text+" is a movie to watch")
+            customListRowDataClassListSuperman.add(CustomListRowDataClass(imageModel.text, imageModel.text+" is a movie to watch"))
             listRowAdapter.add(imageModel)
         }
 
@@ -73,6 +76,7 @@ class ListFragment1 : RowsSupportFragment() {
                                     listRowView.titleName
                                             .visibility = GONE
                                     listRowView.title_desc.visibility = GONE
+                                    listRowView.rating.visibility = GONE
 
                                 }
                             }
@@ -85,17 +89,18 @@ class ListFragment1 : RowsSupportFragment() {
                         listRowView.titleName
                                     .visibility = VISIBLE
                         listRowView.title_desc.visibility=VISIBLE
-                        listRowView.titleName.setText("Hulk " + listRowView.grid_view.selectedPosition)
-                        val desc=desc1.get(listRowView.grid_view.selectedPosition)
-                        listRowView.title_desc.setText(desc)
+                        listRowView.rating.visibility=VISIBLE
+                        listRowView.titleName.setText(customListRowDataClassListHulk.get(listRowView.grid_view.selectedPosition).titleName)
+                        listRowView.rating.setText("  "+customListRowDataClassListHulk.get(listRowView.grid_view.selectedPosition).rating.toString()+"✰")
+                        listRowView.title_desc.setText(customListRowDataClassListHulk.get(listRowView.grid_view.selectedPosition).titleDesc)
 
                     } else {
                         listRowView.titleName
                             .visibility = VISIBLE
                         listRowView.titleName
                                     .visibility = VISIBLE
-                        listRowView.titleName.setText("Superman " + listRowView.grid_view.selectedPosition)
-                        listRowView.title_desc.setText(desc2.get(listRowView.grid_view.selectedPosition))
+                        listRowView.titleName.setText(customListRowDataClassListSuperman.get(listRowView.grid_view.selectedPosition).titleName)
+                        listRowView.title_desc.setText(customListRowDataClassListSuperman.get(listRowView.grid_view.selectedPosition).titleDesc)
 
                     }
                 }
