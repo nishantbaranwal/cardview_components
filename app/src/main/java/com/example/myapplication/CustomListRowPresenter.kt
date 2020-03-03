@@ -19,30 +19,11 @@ class CustomListRowPresenter: ListRowPresenter() {
         return ViewHolder(rowView, rowView.getGridView(), this)
     }
 
-
-
     override fun onBindRowViewHolder(holder: RowPresenter.ViewHolder, item: Any) {
-//        super.onBindRowViewHolder(holder, item)
         val vh = holder as ListRowPresenter.ViewHolder
         val rowItem:Any ?
         if(item is ListRow) {
-            rowItem = item
-            vh.bridgeAdapter?.setAdapter(rowItem.adapter)
-            customListRowView!!.getGridView().adapter = vh.bridgeAdapter
-            customListRowView!!.getGridView().contentDescription = rowItem.contentDescription
-//            val headerName:String=rowItem.headerItem.name
-//            customListRowView!!.setTextView("SuperMan")
-
-//            if(headerName.equals("Superman")) {
-//                customListRowView!!.setImageView(R.drawable.superman)
-//                customListRowView!!.setTextView("SuperMan")
-//
-//            }
-//            else {
-//                customListRowView!!.setImageView(R.drawable.hulk)
-//                customListRowView!!.setTextView("Hulk")
-//
-//            }
+            super.onBindRowViewHolder(holder, item)
         }
         else {
             rowItem = item as CustomListRow

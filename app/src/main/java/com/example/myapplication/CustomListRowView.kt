@@ -32,22 +32,16 @@ class CustomListRowView(context: Context, attributeSet: AttributeSet?) : LinearL
         header.setOnKeyListener { v, keyCode, event ->
             if(event.action == KeyEvent.ACTION_DOWN){
                 if(keyCode==KeyEvent.KEYCODE_DPAD_RIGHT){
-//                    mHorizontalGridView!!.selectedPosition=0
-////                        .requestFocus()
-//                    Log.d("sajfsajkfg",  (mHorizontalGridView!!.getChildAt(0) as ShadowOverlayContainer).getChildAt(0)
-//                        ::class.toString())
+                    mHorizontalGridView!!.selectedPosition=0
                     getTextView().visibility = View.VISIBLE
                 }
             }
             return@setOnKeyListener false
         }
-//        orientation = VERTICAL
-//        val adapter = CustomAdapter(this)
-//
-//        mHorizontalGridView!!.adapter = adapter
+    }
 
-        Log.d("dgfsdgsg",context.toString())
-
+    fun selectedPosition():Boolean{
+        return mHorizontalGridView!=null && mHorizontalGridView!!.selectedPosition==0
     }
 
     fun getGridView(): HorizontalGridView {
@@ -56,7 +50,6 @@ class CustomListRowView(context: Context, attributeSet: AttributeSet?) : LinearL
 
     fun setTextView(a:String){
         titleName.setText(a)
-//        mHorizontalGridView!!.set
     }
 
     fun getTextView():TextView{
