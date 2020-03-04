@@ -1,8 +1,6 @@
-package com.example.myapplication
+package com.example.myapplication.model
 
-import androidx.leanback.widget.HeaderItem
 import androidx.leanback.widget.ObjectAdapter
-import androidx.leanback.widget.Row
 
 class CustomListRow(header: CustomHeaderItem, adapter: ObjectAdapter) : CustomRow(header) {
 

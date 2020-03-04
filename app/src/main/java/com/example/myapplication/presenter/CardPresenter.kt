@@ -1,15 +1,17 @@
-package com.example.myapplication
+package com.example.myapplication.presenter
 
-import android.graphics.Color
 import android.view.ViewGroup
 import androidx.leanback.widget.Presenter
+import com.example.myapplication.view.ImageCardView
+import com.example.myapplication.R
+import com.example.myapplication.model.ImageModel
 
 class CardPresenter(val customListRowPresenter: CustomListRowPresenter): Presenter() {
-    var cardView:ImageCardView?=null
+    var cardView: ImageCardView?=null
     var i:Int=0
     override fun onBindViewHolder(viewHolder: ViewHolder?, item: Any?) {
 
-        val cardView:ImageCardView = viewHolder!!.view as ImageCardView
+        val cardView: ImageCardView = viewHolder!!.view as ImageCardView
         cardView.setMainContainerDimensions(400,300)
         val imageModel = item as ImageModel
         cardView.setTitle(imageModel.text)

@@ -1,8 +1,8 @@
-package com.example.myapplication
+package com.example.myapplication.model
 
 import androidx.leanback.widget.ObjectAdapter.NO_ID
 
- open class CustomRow(headerItem: CustomHeaderItem) {
+open class CustomRow(headerItem: CustomHeaderItem) {
 
     internal var flags = FLAG_ID_USE_HEADER
         private set
@@ -20,7 +20,10 @@ import androidx.leanback.widget.ObjectAdapter.NO_ID
         }
         set(id) {
             mId = id
-            setFlags(FLAG_ID_USE_ID, FLAG_ID_USE_MASK)
+            setFlags(
+                FLAG_ID_USE_ID,
+                FLAG_ID_USE_MASK
+            )
         }
 
     open val isRenderedAsCustomRowView: Boolean

@@ -1,17 +1,14 @@
-package com.example.myapplication
+package com.example.myapplication.testingComponents
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.leanback.widget.BaseCardView
 import kotlinx.android.synthetic.main.rendered_card_view.view.*
-import android.graphics.Color.parseColor
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.view.animation.AnimationUtils
+import com.example.myapplication.R
 
 
 class RenderingCardView(private var ctx: Context,attrs:AttributeSet?= null) : BaseCardView(ctx,attrs) {

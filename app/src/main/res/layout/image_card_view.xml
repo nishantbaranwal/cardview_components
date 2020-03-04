@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:layout_weight=".8"
+        android:layout_weight=".95"
         android:layout_gravity="center"
         android:src="@drawable/hulk"
         />
@@ -21,7 +21,7 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:gravity="center"
-        android:layout_weight=".2"
+        android:layout_weight=".05"
         />
 
 </LinearLayout>

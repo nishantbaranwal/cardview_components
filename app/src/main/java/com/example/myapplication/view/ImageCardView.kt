@@ -1,16 +1,15 @@
-package com.example.myapplication
+package com.example.myapplication.view
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.leanback.widget.BaseCardView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.example.myapplication.R
 import kotlinx.android.synthetic.main.image_card_view.view.container_view
 import kotlinx.android.synthetic.main.image_card_view.view.iv_icon
 import kotlinx.android.synthetic.main.image_card_view.view.tv_title
@@ -46,16 +45,5 @@ class ImageCardView(private var ctx: Context,attrs: AttributeSet?= null) : BaseC
             .load(icon)
             .apply(RequestOptions.bitmapTransform(RoundedCorners(14)))
             .into(iv_icon)
-    }
-
-    fun setIcon(url: String){
-        Glide.with(ctx)
-            .load(url)
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(14)))
-            .into(iv_icon)
-    }
-
-    fun setTitleColor(colorAccent : Int) {
-        tv_title.setTextColor(ContextCompat.getColor(ctx, colorAccent))
     }
 }

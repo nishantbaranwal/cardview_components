@@ -1,18 +1,23 @@
-package com.example.myapplication
+package com.example.myapplication.presenter
 
-import android.util.AttributeSet
-import android.view.View
 import android.view.ViewGroup
 import androidx.leanback.widget.*
+import com.example.myapplication.view.CustomListRowView
+import com.example.myapplication.R
+import com.example.myapplication.model.CustomListRow
 import kotlinx.android.synthetic.main.custom_lb_list_row.view.*
 
 class CustomListRowPresenter: ListRowPresenter() {
 
     var mBrowseRowsFadingEdgeLength: Int = -1
-    var customListRowView:CustomListRowView?=null
+    var customListRowView: CustomListRowView?=null
 
     override fun createRowViewHolder(parent: ViewGroup?): RowPresenter.ViewHolder {
-        customListRowView =CustomListRowView(parent!!.getContext(),R.layout.custom_lb_list_row,null)
+        customListRowView = CustomListRowView(
+            parent!!.getContext(),
+            R.layout.custom_lb_list_row,
+            null
+        )
         val rowView = customListRowView
         setupFadingEffect(rowView!!)
         if (rowHeight != 0) {
@@ -22,7 +27,7 @@ class CustomListRowPresenter: ListRowPresenter() {
     }
 
     override fun onBindRowViewHolder(holder: RowPresenter.ViewHolder, item: Any) {
-        val vh = holder as ListRowPresenter.ViewHolder
+        val vh = holder as ViewHolder
         val rowItem:Any ?
         if(item is ListRow) {
             super.onBindRowViewHolder(holder, item)
@@ -33,47 +38,10 @@ class CustomListRowPresenter: ListRowPresenter() {
             customListRowView!!.grid_view.adapter = vh.bridgeAdapter
             customListRowView!!.grid_view.contentDescription = ""
             customListRowView!!.setImageView(rowItem.headerItem!!.icon)
-
-
-            customListRowView!!.header_title.text=rowItem.headerItem!!.headerTitle
-
-//            customListRowView!!.grid_view.setTitle("safsaf")
-//            customListRowView!!.setTextView(rowItem.)
-//            val headerName:String=rowItem.headerItem.name
-//            if(headerName.equals("Superman")) {
-//                customListRowView!!.setImageView(R.drawable.superman)
-//                customListRowView!!.setTextView("SuperMan")
-//
-//            }
-//            else {
-//                customListRowView!!.setImageView(R.drawable.hulk)
-//                customListRowView!!.setTextView("Hulk")
-//
-//            }
-
+            customListRowView!!.id = rowItem.headerItem!!.id
+            customListRowView!!.header_title.text = rowItem.headerItem!!.headerTitle
         }
-//        rowItem.adapter
-//        vh!!.bridgeAdapter?.setAdapter(rowItem.adapter)
-//        customListRowView!!.grid_view.adapter = vh!!.bridgeAdapter
-//        customListRowView!!.grid_view.contentDescription = rowItem.contentDescription
-//        val headerName:String=rowItem.headerItem.name
-//        if(headerName.equals("Superman")) {
-//            customListRowView!!.setImageView(R.drawable.superman)
-//            customListRowView!!.setTextView("SuperMan")
-//
-//        }
-//        else {
-//            customListRowView!!.setImageView(R.drawable.hulk)
-//            customListRowView!!.setTextView("Hulk")
-//
-//        }
-
     }
-
-
-
-
-
 
     private fun setupFadingEffect(rowView: CustomListRowView) {
         // content is completely faded at 1/2 padding of left, fading length is 1/2 of padding.
@@ -88,5 +56,4 @@ class CustomListRowPresenter: ListRowPresenter() {
         }
         gridView.fadingLeftEdgeLength = mBrowseRowsFadingEdgeLength
     }
-
 }

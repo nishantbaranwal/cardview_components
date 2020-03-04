@@ -19,25 +19,29 @@
     android:weightSum="1">
 
         <LinearLayout
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:orientation="vertical"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:layout_margin="20dp">
-        <ImageView
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
+            android:orientation="vertical"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:id="@+id/header"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/header_title"
-                android:height="16sp"
-                android:focusable="false" />
-        </LinearLayout>
+            android:layout_marginStart="50dp"
+            android:id="@+id/header_ll">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/header"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/header_title"
+                    android:height="16sp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    />
+            </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 lb:rowHeight="170dp"
+                android:layout_marginStart="20dp"
                 style="?attr/rowHorizontalGridStyle" />
             <LinearLayout
                 android:layout_width="match_parent"
