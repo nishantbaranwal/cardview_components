@@ -19,6 +19,10 @@ import com.example.myapplication.presenter.CardPresenter
 import com.example.myapplication.presenter.CustomListRowPresenter
 import kotlinx.android.synthetic.main.custom_lb_list_row.view.*
 import java.util.*
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
+import android.view.View
+import android.widget.LinearLayout
 
 
 class ListFragment1 : RowsSupportFragment() {
@@ -40,8 +44,7 @@ class ListFragment1 : RowsSupportFragment() {
 
         val customListRowPresenter = CustomListRowPresenter()
         val mRowsAdapter = ArrayObjectAdapter(customListRowPresenter)
-        val cardPresenter =
-            CardPresenter(customListRowPresenter)
+        val cardPresenter = CardPresenter()
         var listRowAdapter = ArrayObjectAdapter(cardPresenter)
 
         for (i in 0 until 5) {
@@ -82,10 +85,30 @@ class ListFragment1 : RowsSupportFragment() {
         mRowsAdapter.add(listRow2)
 
         adapter =mRowsAdapter
+
+        val editor = activity!!.getSharedPreferences("Focusing", MODE_PRIVATE).edit()
+        editor.putBoolean("isFocused", false)
+        editor.apply()
         setOnItemViewSelectedListener { itemViewHolder, item, rowViewHolder, row ->
+            Log.d("Focused_value1",activity?.currentFocus.toString())
             if(itemViewHolder!=null && item is ImageModel) {
-                Log.d("dfsf",selectedPosition.toString())
+                val prefs = activity?.getSharedPreferences("Focusing", MODE_PRIVATE)
+                val isFocusing = prefs?.getBoolean("isFocused", false)
                 val listRowView =((rowViewHolder.view) as CustomListRowView)
+
+                if(isFocusing==true){
+
+                    if(listRowView.grid_view.focusedChild !=null) {
+//                        Log.d("FocusedChild", (listRowView.grid_view.focusedChild as ShadowOverlayContainer).wrappedView.isFocused.toString())
+////                        listRowView.grid_view.focusedChild.clearFocus()
+//                        (listRowView.grid_view.focusedChild as ShadowOverlayContainer).wrappedView.requestFocus()
+//                        (listRowView.grid_view.focusedChild as ShadowOverlayContainer).wrappedView.clearFocus()
+                    }
+                    listRowView.header_ll.setFocusable(true)
+                    listRowView.header_ll.isFocusableInTouchMode=true
+                    listRowView.header_ll.requestFocus()
+
+                }
 
                 listRowView.titleName
                     .visibility = VISIBLE
@@ -97,30 +120,30 @@ class ListFragment1 : RowsSupportFragment() {
                             KeyEvent.KEYCODE_DPAD_LEFT -> {
                                 if (listRowView.grid_view.selectedPosition==0) {
                                     listRowView.header_ll.setFocusable(true)
+                                    listRowView.header_ll.setFocusable(true)
                                     listRowView.header_ll.isFocusableInTouchMode = true
                                     listRowView.header_ll
                                         .requestFocus()
                                     listRowView.titleName
-                                            .visibility = GONE
+                                        .visibility = GONE
                                     listRowView.title_desc.visibility = GONE
                                     listRowView.rating.visibility = GONE
                                 }
                             }
                             KeyEvent.KEYCODE_DPAD_UP->{
-//                                listRowView.header_ll.setFocusable(false)
-//                                listRowView.header_ll.isFocusableInTouchMode= false
-                                listRowView.titleName
-                                    .visibility = GONE
-                                listRowView.title_desc.visibility = GONE
-                                listRowView.rating.visibility = GONE
+                                listRowView.header_ll.setFocusable(false)
+                                listRowView.header_ll.isFocusableInTouchMode= false
                             }
                             KeyEvent.KEYCODE_DPAD_DOWN->{
-//                                listRowView.header_ll.setFocusable(false)
-//                                listRowView.header_ll.isFocusableInTouchMode= false
-                                listRowView.titleName
-                                    .visibility = GONE
-                                listRowView.title_desc.visibility = GONE
-                                listRowView.rating.visibility = GONE
+                                listRowView.header_ll.setFocusable(false)
+                                listRowView.header_ll.isFocusableInTouchMode= false
+                                listRowView.grid_view.clearFocus()
+                                (listRowView.grid_view.focusedChild as ShadowOverlayContainer).clearFocus()
+                                ((listRowView.grid_view.focusedChild as ShadowOverlayContainer)
+                                    .wrappedView as ImageCardView).animation
+                                Log.d("sadfgsagf",((listRowView.grid_view.focusedChild as ShadowOverlayContainer)
+                                    .wrappedView as ImageCardView).animation.toString())
+
                             }
                         }
                     }

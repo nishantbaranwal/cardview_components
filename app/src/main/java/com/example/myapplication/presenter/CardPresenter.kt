@@ -6,7 +6,7 @@ import com.example.myapplication.view.ImageCardView
 import com.example.myapplication.R
 import com.example.myapplication.model.ImageModel
 
-class CardPresenter(val customListRowPresenter: CustomListRowPresenter): Presenter() {
+class CardPresenter: Presenter() {
     var cardView: ImageCardView?=null
     var i:Int=0
     override fun onBindViewHolder(viewHolder: ViewHolder?, item: Any?) {
@@ -34,4 +34,6 @@ class CardPresenter(val customListRowPresenter: CustomListRowPresenter): Present
 //        customListRowPresenter.setHeaderImage(R.drawable.hulk)
         return ViewHolder(cardView!!)
     }
+
+
 }

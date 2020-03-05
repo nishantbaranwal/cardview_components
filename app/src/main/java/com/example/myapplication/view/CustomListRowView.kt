@@ -14,6 +14,7 @@ import androidx.leanback.widget.HorizontalGridView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.custom_lb_list_row.view.*
+import android.content.Context.MODE_PRIVATE
 import com.example.myapplication.R
 
 
@@ -39,16 +40,13 @@ class CustomListRowView(context: Context, layoutResource:Int, attributeSet: Attr
                     titleName.visibility = View.VISIBLE
                     title_desc.visibility = View.VISIBLE
                     rating.visibility = View.VISIBLE
-                    header_ll.setFocusable(true)
-                    header_ll.isFocusableInTouchMode= true
 
                 }
                 if(keyCode==KeyEvent.KEYCODE_DPAD_DOWN || keyCode==KeyEvent.KEYCODE_DPAD_UP ){
                     titleName.visibility = View.GONE
                     title_desc.visibility = View.GONE
                     rating.visibility = View.GONE
-//                    header_ll.setFocusable(false)
-//                    header_ll.isFocusableInTouchMode= false
+
                 }
             }
             return@setOnKeyListener false
@@ -58,6 +56,7 @@ class CustomListRowView(context: Context, layoutResource:Int, attributeSet: Attr
             val animSet: AnimatorSet?
             val scaleX: ObjectAnimator?
             val scaleY: ObjectAnimator?
+            val editor = context.getSharedPreferences("Focusing", MODE_PRIVATE).edit()
 
             if(hasFocus){
 
@@ -68,6 +67,8 @@ class CustomListRowView(context: Context, layoutResource:Int, attributeSet: Attr
                 scaleY = ObjectAnimator.ofFloat(header_ll, View.SCALE_Y, 1.2f)
                 header_ll.pivotY = header_ll.measuredHeight.toFloat()/2
                 animSet = AnimatorSet()
+                editor.putBoolean("isFocused", true)
+                editor.apply()
 
             }
             else{
@@ -76,6 +77,8 @@ class CustomListRowView(context: Context, layoutResource:Int, attributeSet: Attr
                 scaleY = ObjectAnimator.ofFloat(header_ll, View.SCALE_Y, 1.0f)
                 header_ll.pivotY = 0.0f
                 animSet = AnimatorSet()
+                editor.putBoolean("isFocused", false)
+                editor.apply()
 
             }
             animSet.setDuration(300).interpolator = AccelerateDecelerateInterpolator()
@@ -87,10 +90,10 @@ class CustomListRowView(context: Context, layoutResource:Int, attributeSet: Attr
 
     fun setImageView(icon:Int){
         i = icon
-            Glide.with(ctx)
-                .load(icon)
-                .apply(RequestOptions.centerCropTransform())
-                .into(header)
+        Glide.with(ctx)
+            .load(icon)
+            .apply(RequestOptions.centerCropTransform())
+            .into(header)
 
     }
 }
