@@ -14,10 +14,10 @@ import androidx.leanback.widget.HorizontalGridView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.custom_lb_list_row.view.*
-import android.content.Context.MODE_PRIVATE
 import com.example.myapplication.R
 
-
+//custom_list_row_view is an holder or parent view for all views
+// i.e. header_template, horizontal_grid_view and template inside one row
 @SuppressLint("ViewConstructor")
 class CustomListRowView(context: Context, layoutResource:Int, attributeSet: AttributeSet?)
     : LinearLayout(context,attributeSet){
@@ -33,31 +33,29 @@ class CustomListRowView(context: Context, layoutResource:Int, attributeSet: Attr
         mHorizontalGridView = findViewById(R.id.grid_view)
         mHorizontalGridView!!.setHasFixedSize(false)
 
+        //focus_management between header_ll
         header_ll.setOnKeyListener { v, keyCode, event ->
-            if(event.action == KeyEvent.ACTION_DOWN){
-                if(keyCode==KeyEvent.KEYCODE_DPAD_RIGHT){
-                    mHorizontalGridView!!.selectedPosition=0
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                    mHorizontalGridView!!.selectedPosition = 0
                     titleName.visibility = View.VISIBLE
                     title_desc.visibility = View.VISIBLE
                     rating.visibility = View.VISIBLE
-
                 }
-                if(keyCode==KeyEvent.KEYCODE_DPAD_DOWN || keyCode==KeyEvent.KEYCODE_DPAD_UP ){
+                if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN || keyCode == KeyEvent.KEYCODE_DPAD_UP) {
                     titleName.visibility = View.GONE
                     title_desc.visibility = View.GONE
                     rating.visibility = View.GONE
-
                 }
             }
             return@setOnKeyListener false
         }
 
+        //focus_management of header_ll
         header_ll.setOnFocusChangeListener { v, hasFocus ->
             val animSet: AnimatorSet?
             val scaleX: ObjectAnimator?
             val scaleY: ObjectAnimator?
-            val editor = context.getSharedPreferences("Focusing", MODE_PRIVATE).edit()
-
             if(hasFocus){
 
                 titleName.visibility = View.GONE
@@ -66,10 +64,8 @@ class CustomListRowView(context: Context, layoutResource:Int, attributeSet: Attr
                 scaleX = ObjectAnimator.ofFloat(header_ll, View.SCALE_X, 1.2f)
                 scaleY = ObjectAnimator.ofFloat(header_ll, View.SCALE_Y, 1.2f)
                 header_ll.pivotY = header_ll.measuredHeight.toFloat()/2
+                grid_view.clearFocus()
                 animSet = AnimatorSet()
-                editor.putBoolean("isFocused", true)
-                editor.apply()
-
             }
             else{
 
@@ -77,9 +73,6 @@ class CustomListRowView(context: Context, layoutResource:Int, attributeSet: Attr
                 scaleY = ObjectAnimator.ofFloat(header_ll, View.SCALE_Y, 1.0f)
                 header_ll.pivotY = 0.0f
                 animSet = AnimatorSet()
-                editor.putBoolean("isFocused", false)
-                editor.apply()
-
             }
             animSet.setDuration(300).interpolator = AccelerateDecelerateInterpolator()
             animSet.playTogether(scaleX, scaleY)
@@ -94,6 +87,5 @@ class CustomListRowView(context: Context, layoutResource:Int, attributeSet: Attr
             .load(icon)
             .apply(RequestOptions.centerCropTransform())
             .into(header)
-
     }
 }

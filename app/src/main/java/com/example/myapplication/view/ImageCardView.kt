@@ -1,10 +1,13 @@
 package com.example.myapplication.view
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.leanback.widget.BaseCardView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -33,7 +36,6 @@ class ImageCardView(private var ctx: Context,attrs: AttributeSet?= null) : BaseC
         lp.width = width
         lp.height = height
         container_view.layoutParams=lp
-        Log.d("sdfsdf","sfsaf")
     }
 
     fun setTitle(title:String){

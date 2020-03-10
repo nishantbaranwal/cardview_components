@@ -1,6 +1,4 @@
 package com.example.myapplication.model
 
-class ImageModel {
-    var text:String=""
-    var icon:Int= 0
-}
+data class ImageModel(var  icon:Int, var text:String)
+
