@@ -1,61 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:context=".testingComponents.MainActivity">
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:orientation="vertical"-->
+<!--    tools:context=".testingComponents.MainActivity">-->
 
-<!--    <com.example.myapplication.testingComponents.RenderingCardView-->
-<!--        android:id="@+id/render_card_view"-->
-<!--        android:layout_width="300dp"-->
+<!--&lt;!&ndash;    <com.example.myapplication.testingComponents.RenderingCardView&ndash;&gt;-->
+<!--&lt;!&ndash;        android:id="@+id/render_card_view"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="300dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="300dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        tools:ignore="MissingConstraints"&ndash;&gt;-->
+<!--&lt;!&ndash;        tools:layout_editor_absoluteX="419dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        tools:layout_editor_absoluteY="0dp" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <com.example.myapplication.view.ImageCardView&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="300dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="300dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        tools:ignore="MissingConstraints"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:id="@+id/render_card_view2"/>&ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical">-->
+<!--&lt;!&ndash;        <com.example.myapplication.view.CustomListRowView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/customListRowView1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <LinearLayout&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="223dp"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:background="#000000"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:visibility="gone"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/ll_title_info"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:orientation="vertical">&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/titleName"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:gravity="center"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="#ffffff"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="16sp" />&ndash;&gt;-->
+<!--&lt;!&ndash;        </LinearLayout>&ndash;&gt;-->
+<!--&lt;!&ndash;        <com.example.myapplication.view.CustomListRowView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/customListRowView2"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <com.example.myapplication.view.CustomListRowView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/customListRowView3"/>&ndash;&gt;-->
+<!--    <ImageView-->
+<!--        android:layout_width="400dp"-->
 <!--        android:layout_height="300dp"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        tools:layout_editor_absoluteX="419dp"-->
-<!--        tools:layout_editor_absoluteY="0dp" />-->
-
-<!--    <com.example.myapplication.view.ImageCardView-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="300dp"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        android:id="@+id/render_card_view2"/>-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-<!--        <com.example.myapplication.view.CustomListRowView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/customListRowView1"/>-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="223dp"-->
-<!--            android:background="#000000"-->
-<!--            android:visibility="gone"-->
-<!--            android:id="@+id/ll_title_info"-->
-<!--            android:orientation="vertical">-->
-
-
-<!--            <TextView-->
-<!--                android:id="@+id/titleName"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:gravity="center"-->
-<!--                android:textColor="#ffffff"-->
-<!--                android:textSize="16sp" />-->
-<!--        </LinearLayout>-->
-<!--        <com.example.myapplication.view.CustomListRowView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/customListRowView2"/>-->
-<!--        <com.example.myapplication.view.CustomListRowView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/customListRowView3"/>-->
-    <ImageView
-        android:layout_width="400dp"
-        android:layout_height="300dp"
-        android:src="@drawable/hulk"
-        android:id="@+id/iv"/>
-    </LinearLayout>
-</ScrollView>
+<!--        android:src="@drawable/hulk"-->
+<!--        android:id="@+id/iv"/>-->
+<!--    </LinearLayout>-->
+<!--</ScrollView>-->
+<!--<layout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools">-->
+<!--    <data>-->
+<!--        <variable name="user" type="com.example.myapplication.model.CustomHeaderItem"/>-->
+<!--    </data>-->
+<!--    &lt;!&ndash; ... rest of layout here &ndash;&gt;-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content">-->
+<!--    <TextView-->
+<!--        android:id="@+id/tvFullName"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text='@{user.headerTitle}' />-->
+<!--</LinearLayout>-->
+<!--</layout>-->
+<LinearLayout android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/holder"
+    android:layout_width="wrap_content"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_frame_layout"/>
+</LinearLayout>
+<!--    <androidx.leanback.widget.VerticalGridView-->
+<!--        android:id="@+id/container_list"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        style="?attr/rowsVerticalGridStyle" />-->

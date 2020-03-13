@@ -1,6 +1,5 @@
 package com.example.myapplication.view
 
-
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -10,11 +9,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.R
-import kotlinx.android.synthetic.main.image_card_view.view.container_view
-import kotlinx.android.synthetic.main.image_card_view.view.iv_icon
-import kotlinx.android.synthetic.main.image_card_view.view.tv_title
+import kotlinx.android.synthetic.main.image_card_view.view.*
 
-class ImageCardView(private var ctx: Context,attrs: AttributeSet?= null) : BaseCardView(ctx,attrs){
+class CustomHeaderView(private var ctx: Context,attrs: AttributeSet?= null) : BaseCardView(ctx,attrs){
 
     private var view: View? = null
 
@@ -24,7 +21,7 @@ class ImageCardView(private var ctx: Context,attrs: AttributeSet?= null) : BaseC
 
     private fun buildContainerCardView(){
         val inflater: LayoutInflater = LayoutInflater.from(ctx)
-        view = inflater.inflate(R.layout.image_card_view,this)
+        view = inflater.inflate(R.layout.custom_header_view,this)
 
     }
 
@@ -44,5 +41,9 @@ class ImageCardView(private var ctx: Context,attrs: AttributeSet?= null) : BaseC
             .load(icon)
             .apply(RequestOptions.bitmapTransform(RoundedCorners(14)))
             .into(iv_icon)
+    }
+
+    fun getLayoutResourceFile(): Int {
+        return R.layout.custom_header_view
     }
 }

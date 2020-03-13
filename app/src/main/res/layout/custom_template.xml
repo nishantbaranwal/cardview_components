@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="template_data" type="com.example.myapplication.model.CustomListRowDataClass"/>
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="61dp">
+        <TextView
+            android:id="@+id/titleName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text='@{template_data.titleName}'
+            android:textSize="16sp"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/title_desc"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:text='@{template_data.titleDesc}'
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rating"
+                android:textStyle="italic|bold"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:layout_marginLeft="30dp"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -10,9 +10,6 @@
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
-    <uses-feature
-        android:name="android.hardware.touchscreen"
-        android:required="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -24,15 +21,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.ListFragmentActivity">
+
+        </activity>
+        <activity android:name=".testingComponents.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
-        <activity android:name=".testingComponents.MainActivity">
-
         </activity>
     </application>
 

@@ -1,13 +1,13 @@
 package com.example.myapplication.testingComponents
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.KeyEvent
+import android.view.View
 import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
+import androidx.leanback.app.RowsSupportFragment
 import androidx.leanback.widget.*
-import kotlinx.android.synthetic.main.activity_main.*
 import com.example.myapplication.R
 import com.example.myapplication.databinding.CustomTemplateBinding
 import com.example.myapplication.model.CustomHeaderItem
@@ -17,23 +17,19 @@ import com.example.myapplication.model.ImageModel
 import com.example.myapplication.presenter.CardPresenter
 import com.example.myapplication.presenter.CustomHeaderPresenter
 import com.example.myapplication.presenter.CustomListRowPresenter
+import com.example.myapplication.view.CustomListRowView
 import kotlinx.android.synthetic.main.custom_lb_list_row.view.*
 import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
-//    private var animSet: AnimatorSet?=null
-//    private var scaleX: ObjectAnimator?=null
-//    private var scaleY: ObjectAnimator?=null
-//    private var binding: ActivityMainBinding? = null
     private var customListRowDataClassListHulk = arrayListOf<CustomListRowDataClass>()
     private var customListRowDataClassListSuperman = arrayListOf<CustomListRowDataClass>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val customListRowPresenter = CustomListRowPresenter(FocusHighlight.ZOOM_FACTOR_NONE)
         val mRowsAdapter = ArrayObjectAdapter(customListRowPresenter)
 
@@ -96,28 +92,94 @@ class MainActivity : AppCompatActivity() {
         val itemBridgeAdapter=ItemBridgeAdapter()
 
         itemBridgeAdapter.setAdapter(mRowsAdapter)
-        container_list.adapter = (itemBridgeAdapter)
-        container_list.setOnChildSelectedListener { parent, view, position, id ->
-            Log.d("MainActivityClass", "view class is ${view.title_template::class.java}" +
-                    " , parentClass is ${parent::class.java} , position is ${position}")
-            val positionGridView = view.grid_view.selectedPosition
+        val rowsSupportFragment=RowsSupportFragment()
+        val mainFragmentAdapter=rowsSupportFragment.getMainFragmentRowsAdapter()
+        mainFragmentAdapter.setAdapter(mRowsAdapter)
+        rowsSupportFragment.setOnItemViewSelectedListener { itemViewHolder, item , rowViewHolder, _ ->
 
-                if (position == 0) {
-                    expandTemplate(
-                        customListRowDataClassListHulk.get(view.grid_view.selectedPosition),
-                        R.layout.custom_template,
-                        view.title_template
-                    )
+            if(itemViewHolder!=null && item is ImageModel) {
+                //custom_list_row_view is an holder or parent view for all views
+                // i.e. header_template, horizontal_grid_view and template inside one row
+                val listRowView =((rowViewHolder.view) as CustomListRowView)
+
+                showTemplate(listRowView)
+
+
+                //ImageCardView on_key_event_listener
+                itemViewHolder.view.setOnKeyListener { _, keyCode, event ->
+                    if(event.action ==  KeyEvent.ACTION_DOWN){
+                        when(keyCode) {
+                            KeyEvent.KEYCODE_DPAD_LEFT -> {
+                                if (listRowView.grid_view.selectedPosition==0) {
+                                    hideTemplate(listRowView)
+                                    listRowView.header_container.requestFocus()
+                                }
+                            }
+                            KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN->{
+                                listRowView.grid_view.selectedPosition=0
+                                hideTemplate(listRowView)
+                            }
+                        }
+                    }
+                    return@setOnKeyListener false
                 }
-                else
-                    if (position == 1)
-                        expandTemplate(
-                            customListRowDataClassListSuperman.get(positionGridView),
-                            R.layout.custom_template,
-                            view.title_template
-                        )
 
+
+
+                if(rowViewHolder!=null) {
+                    //template_insertion
+                    if (rowsSupportFragment.selectedPosition == 0) {
+                        listRowView.expandTemplate(listRow1.customListRowDataClassList.get(listRowView.grid_view.selectedPosition),listRow1.customTemplateLayoutRes)
+
+                        listRowView.expandTemplate(listRow1.customListRowDataClassList.get(listRowView.grid_view.selectedPosition),listRow1.customTemplateLayoutRes)
+//                        listRowView.titleName.text = this.customListRowDataClassListHulk[listRowView.grid_view.selectedPosition].titleName
+//
+//                        listRowView.rating.text=
+//                            """  ${this.customListRowDataClassListHulk[listRowView.grid_view.selectedPosition].rating}✰"""
+//
+//                        listRowView.title_desc.text=
+//                            customListRowDataClassListHulk[listRowView.grid_view.selectedPosition].titleDesc
+
+                    } else {
+                        listRowView.expandTemplate(listRow2.customListRowDataClassList.get(listRowView.grid_view.selectedPosition),listRow2.customTemplateLayoutRes)
+
+//                        listRowView.titleName.text=
+//                            customListRowDataClassListSuperman[listRowView.grid_view.selectedPosition].titleName
+//                        listRowView.title_desc.text =
+//                            customListRowDataClassListSuperman[listRowView.grid_view.selectedPosition].titleDesc
+                    }
+                }
+            }
         }
+
+
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.list_frame_layout, rowsSupportFragment, "as").commit()
+
+
+
+//        container_list.setOnChildSelectedListener { parent, view, position, id ->
+//            Log.d("MainActivityClass", "view class is ${view.title_template::class.java}" +
+//                    " , parentClass is ${parent::class.java} , position is ${position}")
+//            val positionGridView = view.grid_view.selectedPosition
+//
+//                if (position == 0) {
+//                    expandTemplate(
+//                        customListRowDataClassListHulk.get(view.grid_view.selectedPosition),
+//                        R.layout.custom_template,
+//                        view.title_template
+//                    )
+//                }
+//                else
+//                    if (position == 1)
+//                        expandTemplate(
+//                            customListRowDataClassListSuperman.get(positionGridView),
+//                            R.layout.custom_template,
+//                            view.title_template
+//                        )
+//
+//        }
     }
 
     fun expandTemplate(
@@ -133,5 +195,11 @@ class MainActivity : AppCompatActivity() {
         binding.templateData= headerAdapter
         title_template.addView(binding.root)
     }
+    private fun showTemplate(listRowView: CustomListRowView) {
+        listRowView.title_template.visibility = View.VISIBLE
+    }
 
+    private fun hideTemplate(listRowView: CustomListRowView) {
+        listRowView.title_template.visibility = View.GONE
+    }
 }
