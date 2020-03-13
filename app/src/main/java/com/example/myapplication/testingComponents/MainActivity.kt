@@ -1,68 +1,137 @@
 package com.example.myapplication.testingComponents
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.FrameLayout
+import androidx.databinding.DataBindingUtil
+import androidx.leanback.widget.*
 import kotlinx.android.synthetic.main.activity_main.*
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
-import android.view.View
 import com.example.myapplication.R
+import com.example.myapplication.databinding.CustomTemplateBinding
+import com.example.myapplication.model.CustomHeaderItem
+import com.example.myapplication.model.CustomListRow
+import com.example.myapplication.model.CustomListRowDataClass
+import com.example.myapplication.model.ImageModel
+import com.example.myapplication.presenter.CardPresenter
+import com.example.myapplication.presenter.CustomHeaderPresenter
+import com.example.myapplication.presenter.CustomListRowPresenter
+import kotlinx.android.synthetic.main.custom_lb_list_row.view.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
-    private var animSet: AnimatorSet?=null
-    private var scaleX: ObjectAnimator?=null
-    private var scaleY: ObjectAnimator?=null
+//    private var animSet: AnimatorSet?=null
+//    private var scaleX: ObjectAnimator?=null
+//    private var scaleY: ObjectAnimator?=null
+//    private var binding: ActivityMainBinding? = null
+    private var customListRowDataClassListHulk = arrayListOf<CustomListRowDataClass>()
+    private var customListRowDataClassListSuperman = arrayListOf<CustomListRowDataClass>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
-        //render_card_view_initialisation
-//        render_card_view.setIcon(android.R.drawable.presence_audio_away)
-//        render_card_view.setTitle("Hello World!")
-//        render_card_view.selectedColor = R.color.selected
-//        render_card_view.focusedColor = R.color.focused
-//        render_card_view.unFocusedColor = R.color.unfocused
-//
-//        render_card_view2.setMainContainerDimensions(400,300)
-//        render_card_view2.setTitle("Super Man")
-//        render_card_view2.setTitleColor(R.color.colorAccent)
-////        render_card_view2.setIcon(R.drawable.hulk)
-//        render_card_view2.setIcon("https://img.cinemablend.com/filter:scale/quill/8/d/3/c/2/1/8d3c21e54e16aff6ea6eb9385fcf5120ce05b0fb.jpg")
-//        customListRowView1.setFocusable(true)
-//        customListRowView1.isFocusableInTouchMode = true
-//        customListRowView1.setOnFocusChangeListener { v, hasFocus ->
-//            if(hasFocus)
-//                ll_title_info.visibility = VISIBLE
-//            else
-//                ll_title_info.visibility = GONE
-//        }
 
+        val customListRowPresenter = CustomListRowPresenter(FocusHighlight.ZOOM_FACTOR_NONE)
+        val mRowsAdapter = ArrayObjectAdapter(customListRowPresenter)
 
-        var i=0
-        iv.setOnClickListener{
-            if(i==0){
-                scaleX = ObjectAnimator.ofFloat(iv, View.SCALE_X, 1.5f)
-                scaleY = ObjectAnimator.ofFloat(iv, View.SCALE_Y, 1.5f)
-                animSet = AnimatorSet()
-                i=1
-            }
-            else{
-                scaleX = ObjectAnimator.ofFloat(iv, View.SCALE_X, 1.0f)
-                scaleY = ObjectAnimator.ofFloat(iv, View.SCALE_Y, 1.0f)
-                animSet = AnimatorSet()
-                i=0
-            }
-            animSet!!.setDuration(300).interpolator = AccelerateDecelerateInterpolator()
-            animSet!!.playTogether(scaleX, scaleY)
-            animSet!!.start()
+        //customisation of how each card should be presentated with custom_card_view
+        val cardPresenter = CardPresenter()
+
+        // arraylist list of object adapters for coupling each card's presenter
+        var listRowAdapter = ArrayObjectAdapter(cardPresenter)
+
+        //card model data insertion for row 1
+        for (i in 0 until 5) {
+            val imageModel= ImageModel(R.drawable.hulk, "Hulk $i")
+            customListRowDataClassListHulk.add(
+
+                CustomListRowDataClass(
+                    imageModel.text,
+                    imageModel.text + " is a movie to watch",
+                    Random().nextInt(4) + 1
+                )
+            )
+            listRowAdapter.add(imageModel)
+        }
+
+        //custom_header_item for custom_header_insertion_template
+        val customHeaderPresenter = CustomHeaderPresenter()
+        var headerAdapter = ArrayObjectAdapter(customHeaderPresenter)
+        headerAdapter.add( CustomHeaderItem(0, R.drawable.hulk))
+        //custom_list_row for binding custom_header_item and list_row_adapter
+        val listRow1 = CustomListRow(
+            headerAdapter,
+            listRowAdapter,
+            R.layout.custom_header_view,
+            customListRowDataClassListHulk,
+            R.layout.custom_template
+        )
+
+        //card model data insertion for row 2
+        listRowAdapter= ArrayObjectAdapter(cardPresenter)
+        for (i in 0 until 5) {
+
+            val imageModel= ImageModel(R.drawable.superman, "Superman $i")
+            customListRowDataClassListSuperman.add(
+                CustomListRowDataClass(imageModel.text,
+                    imageModel.text + " is a movie to watch")
+            )
+            listRowAdapter.add(imageModel)
+
+        }
+        headerAdapter = ArrayObjectAdapter(customHeaderPresenter)
+        headerAdapter.add(CustomHeaderItem(1, R.drawable.superman, "Superman"))
+        val listRow2 = CustomListRow(
+            headerAdapter,
+            listRowAdapter,
+            R.layout.custom_header_view,
+            customListRowDataClassListHulk,
+            R.layout.custom_template
+        )
+        mRowsAdapter.add(listRow1)
+        mRowsAdapter.add(listRow2)
+        val itemBridgeAdapter=ItemBridgeAdapter()
+
+        itemBridgeAdapter.setAdapter(mRowsAdapter)
+        container_list.adapter = (itemBridgeAdapter)
+        container_list.setOnChildSelectedListener { parent, view, position, id ->
+            Log.d("MainActivityClass", "view class is ${view.title_template::class.java}" +
+                    " , parentClass is ${parent::class.java} , position is ${position}")
+            val positionGridView = view.grid_view.selectedPosition
+
+                if (position == 0) {
+                    expandTemplate(
+                        customListRowDataClassListHulk.get(view.grid_view.selectedPosition),
+                        R.layout.custom_template,
+                        view.title_template
+                    )
+                }
+                else
+                    if (position == 1)
+                        expandTemplate(
+                            customListRowDataClassListSuperman.get(positionGridView),
+                            R.layout.custom_template,
+                            view.title_template
+                        )
+
         }
     }
 
-//    fun setTitleName(s: String) {
-//        titleName.setText(s)
-//
-//    }
+    fun expandTemplate(
+        headerAdapter: CustomListRowDataClass,
+        layoutRes: Int, title_template: FrameLayout
+    ) {
+        title_template.removeAllViews()
+
+        val binding: CustomTemplateBinding = DataBindingUtil.inflate(layoutInflater,
+            layoutRes,title_template,false)
+        binding.templateData= CustomListRowDataClass("","")
+
+        binding.templateData= headerAdapter
+        title_template.addView(binding.root)
+    }
+
 }
