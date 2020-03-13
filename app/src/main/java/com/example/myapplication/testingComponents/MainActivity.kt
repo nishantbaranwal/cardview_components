@@ -132,21 +132,10 @@ class MainActivity : AppCompatActivity() {
                         listRowView.expandTemplate(listRow1.customListRowDataClassList.get(listRowView.grid_view.selectedPosition),listRow1.customTemplateLayoutRes)
 
                         listRowView.expandTemplate(listRow1.customListRowDataClassList.get(listRowView.grid_view.selectedPosition),listRow1.customTemplateLayoutRes)
-//                        listRowView.titleName.text = this.customListRowDataClassListHulk[listRowView.grid_view.selectedPosition].titleName
-//
-//                        listRowView.rating.text=
-//                            """  ${this.customListRowDataClassListHulk[listRowView.grid_view.selectedPosition].rating}✰"""
-//
-//                        listRowView.title_desc.text=
-//                            customListRowDataClassListHulk[listRowView.grid_view.selectedPosition].titleDesc
+
 
                     } else {
                         listRowView.expandTemplate(listRow2.customListRowDataClassList.get(listRowView.grid_view.selectedPosition),listRow2.customTemplateLayoutRes)
-
-//                        listRowView.titleName.text=
-//                            customListRowDataClassListSuperman[listRowView.grid_view.selectedPosition].titleName
-//                        listRowView.title_desc.text =
-//                            customListRowDataClassListSuperman[listRowView.grid_view.selectedPosition].titleDesc
                     }
                 }
             }
@@ -156,30 +145,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.list_frame_layout, rowsSupportFragment, "as").commit()
-
-
-
-//        container_list.setOnChildSelectedListener { parent, view, position, id ->
-//            Log.d("MainActivityClass", "view class is ${view.title_template::class.java}" +
-//                    " , parentClass is ${parent::class.java} , position is ${position}")
-//            val positionGridView = view.grid_view.selectedPosition
-//
-//                if (position == 0) {
-//                    expandTemplate(
-//                        customListRowDataClassListHulk.get(view.grid_view.selectedPosition),
-//                        R.layout.custom_template,
-//                        view.title_template
-//                    )
-//                }
-//                else
-//                    if (position == 1)
-//                        expandTemplate(
-//                            customListRowDataClassListSuperman.get(positionGridView),
-//                            R.layout.custom_template,
-//                            view.title_template
-//                        )
-//
-//        }
+        
     }
 
     fun expandTemplate(
