@@ -145,13 +145,14 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        header_frame_layout.setNumColumns(1)
-        val headersAdapter=ArrayObjectAdapter()
-        headersAdapter.add(HeaderItem(0, "Superman"))
-        headersAdapter.add(HeaderItem(1, "Superman"))
-        val itemBridgeAdapter1=ItemBridgeAdapter()
-        itemBridgeAdapter1.setAdapter(headersAdapter)
-        header_frame_layout.adapter= itemBridgeAdapter1
+//        header_frame_layout.setNumColumns(1)
+//        val headersAdapter=ArrayObjectAdapter()
+//        headersAdapter.add(HeaderItem(0, "Superman"))
+//        headersAdapter.add(HeaderItem(1, "Superman"))
+//        val itemBridgeAdapter1=ItemBridgeAdapter()
+//        itemBridgeAdapter1.setAdapter(headersAdapter)
+//        header_frame_layout.adapter= itemBridgeAdapter1
+
         val manager: FragmentManager = supportFragmentManager
         val trans: FragmentTransaction = manager.beginTransaction()
         trans.add(R.id.list_frame_layout, rowsSupportFragment, "as")
