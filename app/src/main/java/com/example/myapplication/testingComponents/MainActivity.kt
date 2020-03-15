@@ -1,11 +1,15 @@
 package com.example.myapplication.testingComponents
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.leanback.app.HeadersSupportFragment
 import androidx.leanback.app.RowsSupportFragment
 import androidx.leanback.widget.*
 import com.example.myapplication.R
@@ -18,6 +22,7 @@ import com.example.myapplication.presenter.CardPresenter
 import com.example.myapplication.presenter.CustomHeaderPresenter
 import com.example.myapplication.presenter.CustomListRowPresenter
 import com.example.myapplication.view.CustomListRowView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_lb_list_row.view.*
 import java.util.*
 
@@ -116,8 +121,9 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
                             KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN->{
-                                listRowView.grid_view.selectedPosition=0
+                                Log.d("Current_focus",currentFocus.toString())
                                 hideTemplate(listRowView)
+                                listRowView.grid_view.selectedPosition = 0
                             }
                         }
                     }
@@ -130,10 +136,7 @@ class MainActivity : AppCompatActivity() {
                     //template_insertion
                     if (rowsSupportFragment.selectedPosition == 0) {
                         listRowView.expandTemplate(listRow1.customListRowDataClassList.get(listRowView.grid_view.selectedPosition),listRow1.customTemplateLayoutRes)
-
                         listRowView.expandTemplate(listRow1.customListRowDataClassList.get(listRowView.grid_view.selectedPosition),listRow1.customTemplateLayoutRes)
-
-
                     } else {
                         listRowView.expandTemplate(listRow2.customListRowDataClassList.get(listRowView.grid_view.selectedPosition),listRow2.customTemplateLayoutRes)
                     }
@@ -142,10 +145,18 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        header_frame_layout.setNumColumns(1)
+        val headersAdapter=ArrayObjectAdapter()
+        headersAdapter.add(HeaderItem(0, "Superman"))
+        headersAdapter.add(HeaderItem(1, "Superman"))
+        val itemBridgeAdapter1=ItemBridgeAdapter()
+        itemBridgeAdapter1.setAdapter(headersAdapter)
+        header_frame_layout.adapter= itemBridgeAdapter1
+        val manager: FragmentManager = supportFragmentManager
+        val trans: FragmentTransaction = manager.beginTransaction()
+        trans.add(R.id.list_frame_layout, rowsSupportFragment, "as")
+        trans.commit()
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.list_frame_layout, rowsSupportFragment, "as").commit()
-        
     }
 
     fun expandTemplate(
